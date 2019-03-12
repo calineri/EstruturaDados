@@ -14,6 +14,8 @@ public class Bombeiro {
         
         distrito.mostra();
         
+        System.out.println("Quantidade de esquinas: " + distrito.getEsquinas());
+        
         //System.out.println("teste commit via Eclipse 2");
     }
     
@@ -39,13 +41,16 @@ public class Bombeiro {
             String msgErro;
             msgErro = d.insereRua(Integer.decode(vet[0]), Integer.decode(vet[1]));
             
-            if(!msgErro.isBlank()){
+            if(!msgErro.isEmpty()){
                 System.out.println(msgErro);
             }
             
             linha = leBuffer.readLine();
             vet = linha.split(" ");
         }
+        
+        // Fecha arquivo
+        leBuffer.close();
         
     }
 
