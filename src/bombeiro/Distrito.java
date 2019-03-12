@@ -41,19 +41,44 @@ public class Distrito {
     
     public String insereRua( int v, int w){
         String msgErro = "";
+        boolean vis[] = new boolean[21];
         
         if(v == w){
             msgErro = v + " " + w + " ==> Rua nao pode iniciar e finalizar na mesma esquina!";
+        } else if (w == 1){
+            msgErro = v + " " + w + " ==> Rua nao pode voltar ao corpo de bombeiros!";
         } else if (this.adj[v][w]==0){
-            this.adj[v][w]=1;
-            this.esquinas[v]=1;
-            this.esquinas[w]=1;
-            this.qtdRuas++;
+            if (buscaProf(1,vis)){
+                this.adj[v][w]=1;
+                this.esquinas[v]=1;
+                this.esquinas[w]=1;
+                this.qtdRuas++;
+            } else{
+                msgErro = v + " " + w + " ==> Rota cria um ciclo fechado!";
+            }
         }else{
             msgErro = v + " " + w + " ==> Rota ja inserida!";
         }
 
         return msgErro;
+    }
+    
+    private boolean buscaProf(int s, boolean vis[]){
+        if(vis[s]){
+            return false;
+        }
+        
+        vis[s] = true;
+        
+        for(int t=0; t<this.adj.length; t++){
+            if (this.adj[s][t] == 1){
+                if(!vis[t]){
+                    return buscaProf(t, vis);
+                }
+            }
+
+        }
+        return true;
     }
     
     public void mostra(){

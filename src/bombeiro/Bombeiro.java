@@ -45,6 +45,7 @@ public class Bombeiro {
                 System.out.println(msgErro);
             }
             
+            // Le a proxima linha
             linha = leBuffer.readLine();
             vet = linha.split(" ");
         }
