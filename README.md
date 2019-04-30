@@ -5,3 +5,4 @@ Projetos para estudo de Estrutura de Dados - 3o Semestre - Senac 2019
 - Busca em Profundidade
 - Filas
 - Pilha
+- Lista Ligada (Lista Encadeada)
