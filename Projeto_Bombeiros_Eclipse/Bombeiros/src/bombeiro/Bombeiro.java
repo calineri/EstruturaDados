@@ -1,3 +1,9 @@
+/*Alunos : Wellington Maciel
+ *         Celso Alineri
+ *         
+ *         Superior em Jogos digitais - 3o Semestre.
+ * 
+ * */
 package bombeiro;
 
 import java.io.BufferedReader;
@@ -8,17 +14,39 @@ import java.io.IOException;
 public class Bombeiro {
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        Distrito distrito = new Distrito();
+    	// fixo 21 que eh o tamanho maximo de esquinas no distrito
+        Distrito distrito = new Distrito(21);
         
+        // Constroi distrito a partir do arquivo de entrada
         constroiDistrito(distrito);
         
-        distrito.mostra();
+        System.out.println();
         
-        System.out.println("Quantidade de esquinas: " + distrito.getEsquinas());
+        // Obtem os caminhos a partir de um ponto de partida
+        int caminhos[][] = distrito.getCaminhos(1);
         
-        //System.out.println("teste commit via Eclipse 2");
+        // Exibe as rotas encontradas no console
+        if (distrito.getQtdRotas() > 0){
+            System.out.println("Rotas encontradas: ");
+
+            for (int i=0; i<=distrito.getQtdRotas(); i++){
+                for(int j=0; j<caminhos[0].length; j++){
+                    if(caminhos[i][j] != 0){
+                        System.out.print(caminhos[i][j] + " ");
+                    }
+                }
+                System.out.println();
+            }
+        
+            System.out.println("Foram encontradas " + distrito.getQtdRotas() + " rotas do quartel de bombeiros até o incendio.");
+        } else{
+        // Caso nao existam rotas, sera exibida a mensagem abaixo
+            System.out.println("Não foram encontradas rotas do quartel de bombeiros até o incendio.");
+        }
+        
     }
     
+    // Funcao auxiliar para construir o grafo do Distrito a partir de um arquivo de entrada
     public static void constroiDistrito(Distrito d) throws FileNotFoundException, IOException {
         
         String linha;
