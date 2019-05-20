@@ -18,9 +18,9 @@ public class ListaMemoria {
         this.inicio = new Bloco(endInicial, qtdMemoria, this.inicio);
     }
     
-    public int remInicio(){
+    public Bloco remInicio(){
         if(!this.isEmpty()){
-            int ret = this.inicio.getElemento();
+            Bloco ret = this.inicio;
             this.inicio = inicio.getProx();
             return ret;
         }else{

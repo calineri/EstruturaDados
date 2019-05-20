@@ -6,10 +6,21 @@
  * */
 package gerenciadormemoria;
 
+import java.util.Scanner;
+
 public class GerenciadorMemoria {
 
     public static void main(String[] args) {
-        // TODO code application logic here
+        Scanner ent = new Scanner(System.in);
+        ListaMemoria memoriaLivre = new ListaMemoria();;
+        ListaMemoria memoriaAlocada = new ListaMemoria();;
+        
+        System.out.print("Digite a quantidade de memoria disponivel: ");
+        int mem = ent.nextInt();
+        
+        
+        
+        
     }
     
 }

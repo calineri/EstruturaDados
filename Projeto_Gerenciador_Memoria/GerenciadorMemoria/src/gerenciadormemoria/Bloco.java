@@ -19,6 +19,13 @@ public class Bloco {
         this.prox = prox;
     }
     
+        public Bloco(int endInicial, int qtdMemoria, Bloco prox){
+        this.numeroProcesso = 0;
+        this.endInicial = endInicial;
+        this.qtdMemoria = qtdMemoria;
+        this.prox = prox;
+    }
+    
     public int getNumeroProcesso(){
         return this.numeroProcesso;
     }
@@ -45,10 +52,6 @@ public class Bloco {
 
     public void setProx(Bloco prox) {
         this.prox = prox;
-    }
-    
-    public Bloco getBloco(){
-        return this;
     }
     
     @Override
