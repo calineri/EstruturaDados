@@ -7,16 +7,22 @@
 package gerenciadormemoria;
 
 public class Bloco {
+    private final int numeroProcesso;
     private int endInicial;
     private int qtdMemoria;
     private Bloco prox;
     
-    public Bloco(int endInicial, int qtdMemoria, Bloco prox){
+    public Bloco(int numeroProcesso, int endInicial, int qtdMemoria, Bloco prox){
+        this.numeroProcesso = numeroProcesso;
         this.endInicial = endInicial;
         this.qtdMemoria = qtdMemoria;
         this.prox = prox;
     }
-
+    
+    public int getNumeroProcesso(){
+        return this.numeroProcesso;
+    }
+    
     public int getEndInicial() {
         return endInicial;
     }
@@ -39,6 +45,10 @@ public class Bloco {
 
     public void setProx(Bloco prox) {
         this.prox = prox;
+    }
+    
+    public Bloco getBloco(){
+        return this;
     }
     
     @Override
