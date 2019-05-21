@@ -19,7 +19,7 @@ public class Bloco {
         this.prox = prox;
     }
     
-        public Bloco(int endInicial, int qtdMemoria, Bloco prox){
+    public Bloco(int endInicial, int qtdMemoria, Bloco prox){
         this.numeroProcesso = 0;
         this.endInicial = endInicial;
         this.qtdMemoria = qtdMemoria;
