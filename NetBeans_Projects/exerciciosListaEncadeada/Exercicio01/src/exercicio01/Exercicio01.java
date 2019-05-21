@@ -23,6 +23,7 @@ public class Exercicio01 {
         lista.addInicio(40);
         lista.addInicio(50);
         
+        System.out.println(lista);
         System.out.println(lista.buscaLinearIterativa(30));
         System.out.println(lista.buscaLinearRecursiva(30));
     }
