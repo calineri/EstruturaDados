@@ -186,14 +186,18 @@ public class ListaMemoria {
                 
                 if(ant == null){
                     this.inicio = aux.getProx();
+                    aux = this.inicio;
                 }else{
                     ant.setProx(aux.getProx());
+                    //ant = aux;
+                    aux = aux.getProx();
                 }
                 this.qtdBlocos -= 1;
+                
+            }else{
+                ant = aux;
+                aux = aux.getProx();
             }
-            
-            ant = aux;
-            aux = aux.getProx();
         }
     }
     

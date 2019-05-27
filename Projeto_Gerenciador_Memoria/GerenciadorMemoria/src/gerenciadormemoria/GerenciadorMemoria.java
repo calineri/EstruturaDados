@@ -18,7 +18,7 @@ public class GerenciadorMemoria {
         ListaMemoria memLivre = new ListaMemoria();
         ListaMemoria memAlocada = new ListaMemoria();
         
-        System.out.println("SIMULADOR DE MEMORIA");
+        System.out.println("******* SIMULADOR DE MEMORIA *******");
         System.out.println();
         
         System.out.print("Digite a quantidade de memoria disponivel Total: ");
