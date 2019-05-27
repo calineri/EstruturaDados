@@ -9,19 +9,23 @@ package gerenciadormemoria;
 public class ListaMemoria {
     
     private Bloco inicio;
+    private int qtdBlocos;
     
     public ListaMemoria(){
         this.inicio = null;
+        this.qtdBlocos = 0;
     }
     
-    public void addInicio(int endInicial, int qtdMemoria ){
-        this.inicio = new Bloco(endInicial, qtdMemoria, this.inicio);
+    public void addInicio(int qtdMemoria){
+        this.inicio = new Bloco(qtdMemoria, this.inicio);
+        this.qtdBlocos += 1;
     }
     
     public Bloco remInicio(){
         if(!this.isEmpty()){
             Bloco ret = this.inicio;
             this.inicio = inicio.getProx();
+            this.qtdBlocos -= 1;
             return ret;
         }else{
             throw new RuntimeException("Lista Vazia!");
@@ -32,5 +36,108 @@ public class ListaMemoria {
         return this.inicio == null;
     }
     
+    public void addFim(int qtdMemoria) {
+        Bloco aux = this.inicio;
+        Bloco ant=null;
+        while( aux !=null){
+            ant = aux;
+            aux = aux.getProx();
+        }
+        Bloco novo = new Bloco(qtdMemoria, null);
+        if( ant == null )// insere  no inicio
+            this.inicio = novo;
+        else
+            ant.setProx(novo);
+        this.qtdBlocos += 1;
+    }
+    
+    public void addOrdenadoAlocado(int numProc, int tamMemoria, Bloco livre) {
+        Bloco aux = this.inicio;
+        Bloco ant = null;
+        while( aux != null && aux.getNumeroProcesso() < numProc){
+            ant = aux;
+            aux = aux.getProx();
+        }
+        Bloco novo = new Bloco(numProc, livre.getEndInicial(), tamMemoria, aux);
+        if( ant == null )// insere  no inicio
+            this.inicio = novo;
+        else
+            ant.setProx(novo);
+        this.qtdBlocos += 1;
+    }
+    
+    public void addOrdenadoLivre(int endInicial, int tamMemoria) {
+        Bloco aux = this.inicio;
+        Bloco ant = null;
+        while( aux != null && aux.getEndInicial() < endInicial){
+            ant = aux;
+            aux = aux.getProx();
+        }
+        Bloco novo = new Bloco(tamMemoria, aux);
+        if( ant == null )// insere  no inicio
+            this.inicio = novo;
+        else
+            ant.setProx(novo);
+        this.qtdBlocos += 1;
+        
+    }
+    
+    public Bloco verMemLivre(int tam){
+        Bloco aux = this.inicio;
+        
+        while (aux != null){
+            if(tam <= aux.getQtdMemoria()){
+                return aux;
+            }
+            aux = aux.getProx();
+        }
+        
+        return null;
+    }
+    
+    public void subtrai(int tam, Bloco livre){
+        livre.setQtdMemoria(livre.getQtdMemoria() - tam);
+        livre.setEndInicial(livre.getEndInicial() + tam);
+    }
+    
+    public int getQtdBlocos(){
+        return this.qtdBlocos;
+    }
+    
+    public Bloco getBloco(int idx){
+        Bloco aux = this.inicio;
+        int i=0;
+        
+        while (aux != null && i < idx){
+            aux = aux.getProx();
+            i++;
+        }
+        
+        return aux;
+    }
+    
+    public boolean buscaProcessoIgual(int elemento){
+        
+        return buscaProcesso(elemento, this.inicio);
+    }
+    
+    private boolean buscaProcesso(int x, Bloco aux){
+        // Condicoes de parada
+        if(aux == null){
+            return false;
+        }
+        
+        if(aux.getNumeroProcesso() == x){
+            return true;
+        }
+        
+        // Diminui entrada e faz recursividade
+        return buscaProcesso(x, aux.getProx());
+    }
+    
+    @Override
+    public String toString() {
+        return this.inicio+"";
+    }
     
 }
