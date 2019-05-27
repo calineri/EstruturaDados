@@ -79,6 +79,7 @@ public class ListaMemoria {
         else
             ant.setProx(novo);
         this.qtdBlocos += 1;
+        desfragmentaLivre();
         
     }
     
@@ -171,6 +172,29 @@ public class ListaMemoria {
             ant.setProx(aux.getProx());
         }
         this.qtdBlocos -= 1;
+    }
+    
+    private void desfragmentaLivre(){
+        Bloco aux = this.inicio;
+        Bloco ant = null;
+        
+        while(aux != null){
+            int val = aux.getEndInicial() + aux.getQtdMemoria();
+            if(aux.getProx() != null && aux.getProx().getEndInicial() == val){
+                aux.getProx().setEndInicial(aux.getEndInicial());
+                aux.getProx().setQtdMemoria(aux.getQtdMemoria() + aux.getProx().getQtdMemoria());
+                
+                if(ant == null){
+                    this.inicio = aux.getProx();
+                }else{
+                    ant.setProx(aux.getProx());
+                }
+                this.qtdBlocos -= 1;
+            }
+            
+            ant = aux;
+            aux = aux.getProx();
+        }
     }
     
     @Override
