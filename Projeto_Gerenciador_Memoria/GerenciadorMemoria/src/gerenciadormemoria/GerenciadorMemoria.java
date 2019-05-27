@@ -100,8 +100,9 @@ public class GerenciadorMemoria {
     public static void finalizarProcesso(int proc, ListaMemoria memLivre, 
             ListaMemoria memAlocada){
         
-        
-        
+        Bloco alocado = memAlocada.removeAlocado(proc);
+        memLivre.addOrdenadoLivre(alocado.getEndInicial(), alocado.getQtdMemoria());
+        System.out.println("Processo liberado com sucesso!");
     }
     
     public static void imprimir(ListaMemoria memLivre, ListaMemoria memAlocada){

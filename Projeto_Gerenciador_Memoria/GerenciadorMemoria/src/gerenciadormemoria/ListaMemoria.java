@@ -73,7 +73,7 @@ public class ListaMemoria {
             ant = aux;
             aux = aux.getProx();
         }
-        Bloco novo = new Bloco(tamMemoria, aux);
+        Bloco novo = new Bloco(endInicial, tamMemoria, aux);
         if( ant == null )// insere  no inicio
             this.inicio = novo;
         else
@@ -98,6 +98,11 @@ public class ListaMemoria {
     public void subtrai(int tam, Bloco livre){
         livre.setQtdMemoria(livre.getQtdMemoria() - tam);
         livre.setEndInicial(livre.getEndInicial() + tam);
+        
+        if(livre.getQtdMemoria() <= 0){
+            removeLivre(livre.getEndInicial());
+        }
+        
     }
     
     public int getQtdBlocos(){
@@ -133,6 +138,39 @@ public class ListaMemoria {
         
         // Diminui entrada e faz recursividade
         return buscaProcesso(x, aux.getProx());
+    }
+    
+    public Bloco removeAlocado(int proc){
+        Bloco aux = this.inicio;
+        Bloco ant = null;
+        while(aux != null && aux.getNumeroProcesso() != proc){
+            ant = aux;
+            aux = aux.getProx();
+        }
+        
+        if(ant == null){
+            this.inicio = aux.getProx();
+        }else{
+            ant.setProx(aux.getProx());
+        }
+        this.qtdBlocos -= 1;
+        return aux;
+    }
+    
+    private void removeLivre(int endInicial){
+        Bloco aux = this.inicio;
+        Bloco ant = null;
+        while(aux != null && aux.getEndInicial() != endInicial){
+            ant = aux;
+            aux = aux.getProx();
+        }
+        
+        if(ant == null){
+            this.inicio = aux.getProx();
+        }else{
+            ant.setProx(aux.getProx());
+        }
+        this.qtdBlocos -= 1;
     }
     
     @Override
