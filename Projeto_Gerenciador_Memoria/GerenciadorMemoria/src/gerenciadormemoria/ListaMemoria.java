@@ -16,39 +16,8 @@ public class ListaMemoria {
         this.qtdBlocos = 0;
     }
     
-    public void addInicio(int qtdMemoria){
-        this.inicio = new Bloco(qtdMemoria, this.inicio);
-        this.qtdBlocos += 1;
-    }
-    
-    public Bloco remInicio(){
-        if(!this.isEmpty()){
-            Bloco ret = this.inicio;
-            this.inicio = inicio.getProx();
-            this.qtdBlocos -= 1;
-            return ret;
-        }else{
-            throw new RuntimeException("Lista Vazia!");
-        }
-    }
-    
     public boolean isEmpty(){
         return this.inicio == null;
-    }
-    
-    public void addFim(int qtdMemoria) {
-        Bloco aux = this.inicio;
-        Bloco ant=null;
-        while( aux !=null){
-            ant = aux;
-            aux = aux.getProx();
-        }
-        Bloco novo = new Bloco(qtdMemoria, null);
-        if( ant == null )// insere  no inicio
-            this.inicio = novo;
-        else
-            ant.setProx(novo);
-        this.qtdBlocos += 1;
     }
     
     public void addOrdenadoAlocado(int numProc, int tamMemoria, Bloco livre) {
